@@ -1,17 +1,169 @@
 <script>
-    import Nav from './../../components/Nav.svelte'
-</script>
-<Nav/>
-<h1>EazyDay</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorum itaque, laudantium perferendis, sed quidem nobis soluta accusantium quos eveniet ex dolorem ipsa minus laborum! Facere odio nostrum ipsam! Nostrum quaerat quis quod fugiat consectetur expedita illo nulla sapiente iste delectus quam repudiandae repellat soluta temporibus rerum animi facere magnam adipisci culpa tenetur optio, libero accusantium vel reiciendis! Ipsum, mollitia magnam ullam ipsa eius dicta veritatis fugit ipsam et, tenetur sint ducimus distinctio quidem perferendis doloribus error illo reiciendis magni itaque optio possimus delectus accusamus voluptatum sequi. Dignissimos quae, minima neque fuga optio autem sapiente nam ratione obcaecati itaque quo excepturi, cupiditate tenetur quos esse est voluptatibus culpa? Necessitatibus sequi fuga iusto quos corrupti reprehenderit, omnis rem vitae id? Nobis atque ratione minima, veritatis dolorem beatae sapiente soluta, hic iste perspiciatis, vel adipisci odit dignissimos recusandae molestiae. Obcaecati nostrum soluta laborum, quo tempore voluptate voluptates quis ea excepturi cum saepe laboriosam tempora. Laboriosam quibusdam quaerat omnis itaque fuga aliquid? Voluptates sunt officiis molestias facilis repellendus, mollitia corporis at, minima neque ab voluptas quo et recusandae. Quis nihil dolor tempora nostrum deleniti magni, quisquam reiciendis laborum, amet fugit non vitae minus iure ratione, necessitatibus sint nam. Quisquam voluptatum voluptate ab exercitationem voluptates voluptas maiores nemo ducimus sit magni harum qui, eligendi placeat minima, neque perspiciatis, ex quia? Assumenda, quibusdam. Odit dolorum totam nam. Ea rerum esse asperiores repellat animi iste quod facilis totam voluptatum dolorem maiores saepe corporis porro, laudantium odit, natus doloremque magnam voluptate. Quaerat, unde sint. Alias velit doloribus porro quis modi exercitationem vitae natus ex excepturi magni perferendis minima tempora suscipit, ullam maxime odio libero consequuntur. Distinctio, nam, inventore blanditiis nobis et illum perferendis itaque ducimus incidunt reprehenderit fugiat quod voluptatibus ipsa amet nisi animi voluptatum doloribus ea ad debitis laborum praesentium. Esse officia placeat voluptas quod nisi.</p>
+    import { language } from '../../stores/language.js';
+  
+    // Language-specific content
+    const text = {
+      en: {
+        introduction: "Eziday is a brand name for the drug Losartan, commonly prescribed in 25 mg or 50 mg doses, which belongs to a group of medications called angiotensin II receptor blockers (ARBs). It’s primarily used to treat high blood pressure (hypertension) and is sometimes prescribed for other cardiovascular conditions.",
+        definition: "Losartan is an ARB that works by blocking the action of angiotensin II, a chemical in the body that narrows blood vessels and increases blood pressure. By blocking this effect, Losartan helps relax blood vessels, which lowers blood pressure and improves blood flow.",
+        basic_usage: {
+          point1: "Hypertension (High Blood Pressure): Losartan is primarily prescribed to lower high blood pressure, which can help prevent heart attacks, strokes, and kidney problems.",
+          point2: "Heart Protection in Diabetes: It’s also used to help protect the kidneys in people with type 2 diabetes who have high blood pressure.",
+        },
+        advanced_usage: {
+          point1: "Heart Failure: Losartan may be used in managing chronic heart failure to improve heart function.",
+          point2: "Prevention of Strokes: In some patients, Losartan can reduce the risk of strokes, particularly in those with a heart condition known as left ventricular hypertrophy (enlarged heart).",
+        },
+        when_not_to_use: {
+          point1: "Pregnancy: Losartan should not be taken during pregnancy, especially in the second and third trimesters, as it can harm the developing fetus.",
+          point2: "Kidney Impairment: People with severe kidney impairment or those who are on certain medications like ACE inhibitors should avoid Losartan.",
+          point3: "Allergy: If you have a known allergy to Losartan or any of its components, you should not take this medication.",
+        },
+        side_effects: {
+          point1: "Dizziness or lightheadedness (especially when starting the medication or increasing the dose)",
+          point2: "Fatigue",
+          point3: "Nausea",
+          point4: "High potassium levels (hyperkalemia), which can cause symptoms like weakness, irregular heartbeat, or muscle pain",
+          point5: "Kidney function changes or worsening kidney function",
+          point6: "Allergic reactions, though rare, can occur and may include swelling, rash, and breathing difficulties.",
+        },
+        conclusion: "Losartan (Eziday) is generally well-tolerated and effective for managing blood pressure and reducing cardiovascular risks, especially in patients with diabetes or heart conditions. However, it must be used under the guidance of a healthcare professional to avoid side effects and potential interactions. Avoiding Losartan during pregnancy and being cautious with kidney issues is essential, as is regular monitoring of blood pressure and kidney function during use."
+      },
+      ur: {
+    introduction: "Eziday ایک دوائی Losartan کا برانڈ نام ہے، جو عام طور پر 25 mg یا 50 mg کی خوراک میں تجویز کی جاتی ہے، اور یہ انجیوٹینسن II ریسیپٹر بلاکرز (ARBs) نامی دوائیوں کے گروپ سے تعلق رکھتی ہے۔ اسے بنیادی طور پر ہائی بلڈ پریشر (ہائپرٹینشن) کے علاج کے لیے استعمال کیا جاتا ہے اور بعض اوقات دل کی دیگر بیماریوں کے لیے بھی تجویز کیا جاتا ہے۔",
+    definition: "Losartan ایک ARB ہے جو انجیوٹینسن II کے اثر کو بلاک کر کے کام کرتا ہے، یہ جسم میں ایک ایسا کیمیکل ہے جو خون کی نالیوں کو سکڑتا ہے اور بلڈ پریشر کو بڑھاتا ہے۔ اس اثر کو روک کر، Losartan خون کی نالیوں کو آرام دینے میں مدد کرتا ہے، جو بلڈ پریشر کو کم کرتا ہے اور خون کے بہاؤ کو بہتر بناتا ہے۔",
+    basic_usage: {
+      point1: "بلند فشار خون: Losartan کو بنیادی طور پر بلند فشار خون کو کم کرنے کے لیے تجویز کیا جاتا ہے، جس سے دل کے دورے، فالج، اور گردوں کے مسائل سے بچاؤ میں مدد مل سکتی ہے۔",
+      point2: "ذیابیطس میں دل کی حفاظت: اسے ٹائپ 2 ذیابیطس کے مریضوں میں دل اور گردوں کی حفاظت کے لیے بھی استعمال کیا جاتا ہے۔",
+    },
+    advanced_usage: {
+      point1: "دل کی ناکامی: Losartan کو بعض اوقات دل کی دائمی ناکامی کو بہتر بنانے کے لیے استعمال کیا جا سکتا ہے۔",
+      point2: "فالج سے بچاؤ: کچھ مریضوں میں، خاص طور پر ان میں جو بائیں وینٹریکولر ہائپرٹرافی (بڑا ہوا دل) کے مسئلے سے دوچار ہیں، فالج کا خطرہ کم کرنے میں مددگار ثابت ہو سکتا ہے۔",
+    },
+    when_not_to_use: {
+      point1: "حمل: Losartan حمل کے دوران نہیں لینا چاہیے، خاص طور پر دوسرے اور تیسرے سہ ماہی میں، کیونکہ اس سے بچے کو نقصان پہنچ سکتا ہے۔",
+      point2: "گردوں کی بیماری: شدید گردے کی بیماری یا کچھ دوائیں جیسے ACE inhibitors استعمال کرنے والے افراد کو Losartan سے پرہیز کرنا چاہیے۔",
+      point3: "الرجی: اگر آپ کو Losartan یا اس کے کسی بھی جزو سے الرجی ہو، تو یہ دوا نہیں لینا چاہیے۔",
+    },
+    side_effects: {
+      point1: "چکر آنا یا ہلکی سرسراہٹ (خاص طور پر دوا شروع کرنے یا خوراک بڑھانے کے وقت)",
+      point2: "تھکاوٹ",
+      point3: "متلی",
+      point4: "ہائی پوٹاشیم کی سطح (ہائپرکلیمیا)، جو کمزوری، بے قاعدہ دل کی دھڑکن، یا پٹھوں میں درد جیسے علامات کا سبب بن سکتی ہے",
+      point5: "گردوں کے کام میں تبدیلی یا اس میں مزید بگاڑ",
+      point6: "کبھی کبھار الرجی ردعمل، جیسے سوجن، خارش، اور سانس کی تکلیف",
+    },
+    conclusion: "Losartan (Eziday) عام طور پر اچھی طرح برداشت کی جاتی ہے اور بلڈ پریشر کو کنٹرول کرنے اور دل کی بیماری کے خطرات کو کم کرنے میں مؤثر ثابت ہوتی ہے، خاص طور پر ان مریضوں میں جو ذیابیطس یا دل کے امراض کا شکار ہیں۔ اس کے استعمال میں احتیاط کی ضرورت ہے، خاص طور پر حمل کے دوران یا گردوں کی بیماری کی صورت میں، اور بلڈ پریشر اور گردوں کے فعل کا باقاعدگی سے معائنہ کیا جانا چاہیے۔"
+  }
+    };
+  </script>
+  
 
-<h1>Panadol</h1>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis distinctio praesentium voluptates temporibus quidem voluptatum mollitia facilis dolorem in pariatur iusto, molestiae reprehenderit blanditiis facere, ipsam dolores nesciunt! Quod laudantium minima nisi provident, recusandae aliquid sit sunt, tempora neque eaque hic? Earum nostrum natus sed suscipit aspernatur expedita enim impedit atque ipsum error laudantium excepturi, commodi mollitia quod! Molestiae sunt corporis nobis labore incidunt. Tempora amet animi itaque sint porro modi. Nobis reiciendis explicabo, vitae maxime aut quibusdam ducimus dolorem. Maxime ipsum perspiciatis culpa sit quae quasi aperiam magni, voluptatum commodi minima voluptatem consequuntur ex unde deserunt quam ducimus laboriosam rem exercitationem eaque minus laudantium alias rerum aspernatur? Ipsa facilis, illo est iste iure beatae repellendus cupiditate? Ullam asperiores quisquam, consequuntur dignissimos sed voluptatum maiores error? Blanditiis doloribus, impedit placeat nihil laboriosam laborum consequatur vero odio consequuntur id aliquam, necessitatibus sequi porro alias quia voluptatibus suscipit provident ab sint repellat et maxime. Cumque maiores consectetur vero magnam saepe beatae enim expedita veritatis id, vel, officiis suscipit. Reiciendis deleniti ipsam minima repellendus aliquid odit maxime obcaecati? Quisquam sed voluptate assumenda similique veniam autem ut officiis eius? Sapiente ipsam sequi dolorem doloribus neque repellat veniam velit, ex laudantium, autem, atque iure repellendus consequatur corrupti maxime dicta eaque ab pariatur repudiandae suscipit itaque fuga impedit voluptates? Doloremque deleniti quos sunt sapiente in omnis atque praesentium cupiditate facere perspiciatis, accusamus nulla distinctio, officiis suscipit deserunt veniam et aliquam dolor saepe ad dolores. A eius quo voluptatem, iure, ipsam nobis corrupti laudantium voluptas perspiciatis quia consequatur officiis fugiat quam, esse cum accusamus. Asperiores doloremque praesentium in officiis quia rerum laborum deserunt! Velit id cum laudantium quas nam ducimus debitis totam voluptas iusto minus incidunt, sunt nisi dignissimos adipisci libero quisquam sint autem ipsa qui officiis, ab pariatur. Ut atque itaque fuga, accusantium fugit reiciendis corrupti.</p>
-
-<h1>Luprene</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae animi dolorum modi atque iste quae placeat harum, sapiente, commodi ea inventore dolores facilis officiis blanditiis recusandae nostrum quibusdam aliquid enim? In pariatur quo, non quibusdam debitis repudiandae voluptates illum ipsum nulla eius sint quis accusantium soluta commodi voluptatum deserunt ullam laudantium natus consequatur temporibus ducimus est id aliquam sequi! Nostrum neque sapiente corrupti quia cumque, asperiores, officia optio ex beatae nemo laudantium doloribus, culpa deleniti porro dicta molestiae dolore atque soluta obcaecati distinctio blanditiis omnis illum error ab. Illo alias itaque rerum delectus doloribus sunt commodi hic! Rerum autem omnis qui! Eum ratione ad magnam necessitatibus eos odio dolore error, placeat vitae assumenda asperiores natus voluptatum distinctio incidunt repudiandae minima voluptas, similique eligendi adipisci accusamus odit! Dolorem provident alias non similique, ipsum consequuntur beatae quod quia ratione dolor odio perspiciatis inventore qui aut officiis enim eos nobis vitae, totam rerum. Consectetur, impedit recusandae doloribus nulla officiis vel maiores et alias expedita ipsam odit architecto corporis corrupti ad, tempora, distinctio accusamus perferendis rerum deleniti! Repellat, repellendus doloribus reiciendis ducimus obcaecati assumenda voluptates corrupti numquam deserunt quis accusamus optio aperiam soluta reprehenderit harum quas at asperiores. Mollitia ullam iusto explicabo, error illo debitis dolor magnam aperiam nulla corrupti sint incidunt, deleniti et esse deserunt? Ducimus distinctio nihil deserunt dolorum libero quod vero. Neque qui asperiores id ipsam ex perspiciatis porro aperiam, eaque rem cumque voluptatum dolorem placeat molestiae, obcaecati quae labore. Odit exercitationem sequi iure eius sunt ipsum rem quasi cupiditate reiciendis pariatur. Dolorum, ratione, perferendis at maiores ex voluptas expedita et similique, distinctio culpa corrupti explicabo rerum accusantium cupiditate animi ea asperiores incidunt quaerat optio itaque velit reiciendis! Ratione rerum velit quos perferendis adipisci inventore, iusto quibusdam consequatur eligendi minus nesciunt dolores repellendus aperiam laborum illum, vitae perspiciatis enim ea? Quasi.</p>
-
-<h1>Ponston</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat minima id temporibus aperiam pariatur iure in nemo hic unde qui ullam et deserunt facere aliquam illo porro omnis praesentium, alias ea excepturi corporis obcaecati totam. Officia culpa doloribus aut consectetur aspernatur, soluta, provident asperiores omnis, nesciunt quam ipsam? Omnis cumque officia at tempore sint laboriosam quod, reprehenderit non voluptatem repudiandae culpa accusantium itaque placeat, aut impedit natus laudantium explicabo voluptates voluptas temporibus excepturi rerum animi odit? Nihil quasi deserunt molestiae modi delectus, quidem neque nisi ullam dignissimos fugit veniam voluptatum, eaque eos similique blanditiis ratione dolorum debitis cupiditate non eius saepe odio sapiente labore? Voluptatum asperiores pariatur porro corporis ex quae nihil nesciunt eligendi quas, commodi assumenda vitae dolorum deleniti repudiandae explicabo, recusandae ut sint veritatis quisquam! Possimus esse illo modi, maiores voluptas quae dolorum necessitatibus! Et, eveniet nisi. Error aliquam repellendus harum officiis id? Deleniti ut, consequatur rerum voluptatibus neque explicabo veritatis sint accusantium eveniet vel ea eius nobis autem harum iusto ab enim facere! Delectus consequatur quae ducimus cupiditate. Modi, obcaecati quisquam quibusdam itaque in nemo a quia officia et ducimus labore eaque distinctio nostrum odit repellendus debitis. Eius, sint nostrum. Provident nisi omnis quia labore aut eligendi illum. Velit adipisci natus voluptate, quidem vero veniam delectus ducimus eos architecto nobis similique quam laudantium culpa repellendus a ullam exercitationem ea ipsum labore provident veritatis. Asperiores, maxime qui, reiciendis commodi ex voluptate necessitatibus consequuntur, sed pariatur voluptas perspiciatis? Labore dolorum porro quidem nemo ea, reprehenderit cum excepturi saepe magni reiciendis, placeat quisquam id vero! Voluptates, ab maiores hic eius doloribus accusantium dolore atque eveniet natus rem repudiandae necessitatibus dolorum magni ipsa obcaecati? Rem quia provident perferendis minima molestias quisquam, quidem, in odit explicabo error saepe. Hic ex quisquam porro, consequatur, nemo sit aspernatur totam, error quis ipsum veritatis doloribus.</p>
-
-<!-- <style></style> -->
+  
+  {#if $language === 'en'}
+  <h1>Eziday</h1>
+    <p>{text.en.introduction}</p>
+  
+    <h6>Definition</h6>
+    <p>{text.en.definition}</p>
+  
+    <h6>Basic Usage</h6>
+    <ul>
+      <li>{text.en.basic_usage.point1}</li>
+      <li>{text.en.basic_usage.point2}</li>
+    </ul>
+  
+    <h6>Advanced Usage</h6>
+    <ul>
+      <li>{text.en.advanced_usage.point1}</li>
+      <li>{text.en.advanced_usage.point2}</li>
+    </ul>
+  
+    <h6>When Not to Use</h6>
+    <ul>
+      <li>{text.en.when_not_to_use.point1}</li>
+      <li>{text.en.when_not_to_use.point2}</li>
+      <li>{text.en.when_not_to_use.point3}</li>
+    </ul>
+  
+    <h6>Side Effects</h6>
+    <ul>
+      <li>{text.en.side_effects.point1}</li>
+      <li>{text.en.side_effects.point2}</li>
+      <li>{text.en.side_effects.point3}</li>
+      <li>{text.en.side_effects.point4}</li>
+      <li>{text.en.side_effects.point5}</li>
+      <li>{text.en.side_effects.point6}</li>
+    </ul>
+  
+    <h6>Conclusion</h6>
+    <p>{text.en.conclusion}</p>
+  {:else}
+    <!-- Urdu Translation Content Here with Same Structure -->
+    <h1>Eziday</h1>
+    <p>{text.ur.introduction}</p>
+  
+    <h6>Introduction</h6>
+    <p>{text.ur.definition}</p>
+  
+    <h6>Basic Usage</h6>
+    <ul>
+      <li>{text.ur.basic_usage.point1}</li>
+      <li>{text.ur.basic_usage.point2}</li>
+    </ul>
+  
+    <h6>Advanced Usage</h6>
+    <ul>
+      <li>{text.ur.advanced_usage.point1}</li>
+      <li>{text.ur.advanced_usage.point2}</li>
+    </ul>
+  
+    <h6>When Not to Use</h6>
+    <ul>
+      <li>{text.ur.when_not_to_use.point1}</li>
+      <li>{text.ur.when_not_to_use.point2}</li>
+      <li>{text.ur.when_not_to_use.point3}</li>
+    </ul>
+  
+    <h6>Side Effects</h6>
+    <ul>
+      <li>{text.ur.side_effects.point1}</li>
+      <li>{text.ur.side_effects.point2}</li>
+      <li>{text.ur.side_effects.point3}</li>
+      <li>{text.ur.side_effects.point4}</li>
+      <li>{text.ur.side_effects.point5}</li>
+      <li>{text.ur.side_effects.point6}</li>
+    </ul>
+  
+    <h6>Conclusion</h6>
+    <p>{text.ur.conclusion}</p>
+  {/if}
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+      color: black;
+    }
+    h1 {
+      font-size: 48px;
+      margin: 40px 0;
+      text-decoration: underline;
+      text-align: center;
+    }
+    h6 {
+      font-size: 24px;
+      margin: 20px 0 10px;
+    }
+    p, li {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 10px 0;
+    }
+    ul {
+      margin: 0 0 20px 20px;
+    }
+  </style>
+  

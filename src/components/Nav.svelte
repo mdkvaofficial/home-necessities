@@ -1,19 +1,15 @@
 <script>
-  import { writable } from 'svelte/store';
+  import { language } from './../stores/language';  // Import language store
 
-  // Create a language store to manage the current language globally
-  export const language = writable('en'); // Default language is English ('en')
-
-  // Toggle function to switch languages
-  function setLanguage(lang) {
-    language.set(lang);
-  }
-
-  // Toggle dropdown visibility
   let dropdownVisible = false;
 
   function toggleDropdown() {
     dropdownVisible = !dropdownVisible;
+  }
+
+  function setLanguage(lang) {
+    language.set(lang);  // Update the language in the store
+    dropdownVisible = false;
   }
 </script>
 
@@ -23,7 +19,7 @@
   <a href="./bp">Blood Pressure</a>
   <a href="./diabetes">Diabetes</a>
   <button on:click={toggleDropdown}>Language</button>
-  
+
   {#if dropdownVisible}
     <div class="dropdown">
       <button on:click={() => setLanguage('en')}>English</button>
@@ -62,7 +58,6 @@
     background-color: black;
     border: 1px solid white;
     padding: 0.5em;
-   
   }
 
   .dropdown button {
