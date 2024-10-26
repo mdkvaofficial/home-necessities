@@ -1,5 +1,5 @@
 import { H as HYDRATION_ERROR, g as get_next_sibling, d as define_property, s as set_active_reaction, a as set_active_effect, i as is_array, b as active_reaction, c as active_effect, e as init_operations, f as get_first_child, h as HYDRATION_START, j as HYDRATION_END, k as hydration_failed, l as clear_text_content, m as array_from, n as effect_root, o as create_text, p as branch, q as push, r as pop, t as component_context, u as get, v as set, w as flush_sync, x as mutable_source, y as render, z as push$1, A as setContext, B as pop$1 } from "./index.js";
-let base = "/repo";
+let base = "/home-necessities";
 let assets = base;
 const initial = { base, assets };
 function override(paths) {
@@ -545,7 +545,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1s5n5iv"
+  version_hash: "bp2xo9"
 };
 async function get_hooks() {
   return {};
