@@ -8,7 +8,7 @@ export default {
     }),
     paths: {
       // replace 'username' and 'repo' with your GitHub username and repository name
-     base: process.env.NODE_ENV === 'production' ? '/home-necessities' : ''
+     base: process.env.NODE_ENV === 'production' ? '/repo' : ''
     }
   }
 };
